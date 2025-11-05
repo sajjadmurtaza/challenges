@@ -15,28 +15,28 @@ puts '-' * 80
 sizes.each do |n|
   input = 'a' * n
   time = Benchmark.realtime { StringUtils.my_reverse(input) }
-  puts format('Size: %10d chars | Time: %10.6f seconds | Rate: %12.0f chars/sec',
-              n, time, n / time)
+  puts format('Size: %<size>10d chars | Time: %<time>10.6f seconds | Rate: %<rate>12.0f chars/sec',
+              size: n, time: time, rate: n / time)
 end
 
 puts
 puts 'Testing with varied character strings:'
 puts '-' * 80
 sizes.each do |n|
-  input = ('abcdefghij' * (n / 10 + 1))[0...n]
+  input = ('abcdefghij' * ((n / 10) + 1))[0...n]
   time = Benchmark.realtime { StringUtils.my_reverse(input) }
-  puts format('Size: %10d chars | Time: %10.6f seconds | Rate: %12.0f chars/sec',
-              n, time, n / time)
+  puts format('Size: %<size>10d chars | Time: %<time>10.6f seconds | Rate: %<rate>12.0f chars/sec',
+              size: n, time: time, rate: n / time)
 end
 
 puts
 puts 'Testing with unicode characters:'
 puts '-' * 80
 [10, 100, 1_000, 10_000].each do |n|
-  input = ('こんにちは世界' * (n / 7 + 1))[0...n]
+  input = ('こんにちは世界' * ((n / 7) + 1))[0...n]
   time = Benchmark.realtime { StringUtils.my_reverse(input) }
-  puts format('Size: %10d chars | Time: %10.6f seconds | Rate: %12.0f chars/sec',
-              n, time, n / time)
+  puts format('Size: %<size>10d chars | Time: %<time>10.6f seconds | Rate: %<rate>12.0f chars/sec',
+              size: n, time: time, rate: n / time)
 end
 
 puts
@@ -47,8 +47,8 @@ puts '-' * 80
   result = Benchmark.measure do
     10.times { StringUtils.my_reverse(input) }
   end
-  puts format('Size: %10d chars | Total time: %8.6f sec | Avg: %8.6f sec',
-              n, result.real, result.real / 10)
+  puts format('Size: %<size>10d chars | Total time: %<total>8.6f sec | Avg: %<avg>8.6f sec',
+              size: n, total: result.real, avg: result.real / 10)
 end
 
 puts
@@ -63,8 +63,9 @@ baseline_time = Benchmark.realtime { StringUtils.my_reverse('a' * baseline_size)
   ratio = time / expected_time
   status = ratio < 2.0 ? 'PASS' : 'WARN'
 
-  puts format('Size: %10d | Time: %8.6f | Expected: %8.6f | Ratio: %5.2fx [%s]',
-              n, time, expected_time, ratio, status)
+  puts format('Size: %<size>10d | Time: %<time>8.6f | Expected: %<expected>8.6f | ' \
+              'Ratio: %<ratio>5.2fx [%<status>s]',
+              size: n, time: time, expected: expected_time, ratio: ratio, status: status)
 end
 
 puts
