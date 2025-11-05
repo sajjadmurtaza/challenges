@@ -63,3 +63,6 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: no_comma
+
+Capybara/RSpec/PredicateMatcher:
+  Enabled: false

@@ -110,7 +110,7 @@ RSpec.describe StringUtils do
       end
 
       it 'raises ArgumentError for array input' do
-        expect { described_class.my_reverse(['a', 'b']) }.to raise_error(ArgumentError, 'Expected a String')
+        expect { described_class.my_reverse(%w[a b]) }.to raise_error(ArgumentError, 'Expected a String')
       end
 
       it 'raises ArgumentError for hash input' do
@@ -140,7 +140,7 @@ RSpec.describe StringUtils do
       end
 
       it 'handles frozen strings' do
-        frozen_str = 'hello'.freeze
+        frozen_str = 'hello'
         expect { described_class.my_reverse(frozen_str) }.not_to raise_error
         expect(described_class.my_reverse(frozen_str)).to eq('olleh')
       end
