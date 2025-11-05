@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'benchmark'
 
 RSpec.describe StringUtils do
   describe '.my_reverse' do
@@ -157,9 +158,8 @@ RSpec.describe StringUtils do
     context 'with performance characteristics' do
       it 'completes in reasonable time for medium strings' do
         input = 'x' * 10_000
-        start_time = Time.now
+        elapsed_time = Benchmark.realtime { described_class.my_reverse(input) }
         result = described_class.my_reverse(input)
-        elapsed_time = Time.now - start_time
 
         expect(result.length).to eq(10_000)
         expect(elapsed_time).to be < 0.1

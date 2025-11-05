@@ -1,6 +1,6 @@
 # String Reversal Utils
 
-Production-ready string manipulation utilities demonstrating enterprise-grade Ruby development practices.
+Production-ready string manipulation utilities demonstrating professional Ruby development practices.
 
 ## Overview
 
@@ -177,7 +177,6 @@ All jobs run automatically on:
 ```ruby
 def self.my_reverse(string)
   raise ArgumentError, 'Expected a String' unless string.is_a?(String)
-  return '' if string.empty?
 
   reversed = +''
   i = string.length - 1
@@ -199,10 +198,10 @@ end
 ### Design Decisions
 
 1. **Character-by-character iteration**: Simple, predictable performance
-2. **While loop instead of each**: Direct index access for clarity
-3. **Early return for empty strings**: Optimization for edge case
-4. **Type validation**: Fail fast with clear error messages
-5. **Frozen string literals**: Memory optimization
+2. **While loop**: Direct index access for clarity and KISS principle
+3. **Type validation**: Fail fast with clear error messages
+4. **Frozen string literals**: Memory optimization
+5. **YARD documentation**: Clear method and module documentation
 
 ## Project Structure
 
@@ -258,6 +257,7 @@ bundle exec rspec --tag focus                    # Run focused tests
 - simplecov ~> 0.22
 
 **Development Group**:
+- rake ~> 13.0
 - rubocop ~> 1.50
 - rubocop-rspec ~> 2.20
 
