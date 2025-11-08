@@ -4,7 +4,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.4
   NewCops: enable
   Exclude:
     - 'vendor/**/*'
@@ -36,6 +36,12 @@ Metrics/MethodLength:
   Max: 15
   Exclude:
     - 'benchmark/**/*'
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
 
 RSpec/ExampleLength:
   Max: 10

@@ -1,28 +1,48 @@
-# String Reversal Utils
+# Ruby Coding Challenges
 
-Production-ready string manipulation utilities demonstrating professional Ruby development practices.
+Production-ready Ruby utilities demonstrating professional development practices through algorithmic challenges.
 
 ## Overview
 
-A custom string reversal implementation built without using Ruby's built-in `reverse` or `reverse!` methods. This project showcases professional software development practices including comprehensive testing, performance benchmarking, code quality enforcement, and automated CI/CD.
+A collection of custom algorithm implementations built to showcase professional software development practices including comprehensive testing, performance benchmarking, code quality enforcement, and automated CI/CD.
 
-## Features
+## Challenges
 
-- **Custom String Reversal**: O(n) time complexity implementation
-- **Type Safety**: Input validation with clear error messages
-- **Unicode Support**: Handles multibyte characters (emoji, Japanese, Arabic, etc.)
-- **100% Test Coverage**: 33 comprehensive test cases
-- **Performance Validated**: Benchmarked across multiple input sizes
-- **Code Quality**: RuboCop linting with Ruby 3.0+ standards
+### Challenge 1: String Reversal
+
+Custom string reversal implementation without using Ruby's built-in `reverse` or `reverse!` methods.
+
+**Features:**
+- O(n) time complexity implementation
+- Type safety with input validation
+- Unicode support for multibyte characters
+- 33 comprehensive test cases with 100% coverage
+
+### Challenge 2: Nested Array Maximum
+
+Find the maximum value in nested array structures without using array flattening methods.
+
+**Features:**
+- Recursive traversal of nested arrays
+- O(n) time complexity for total elements
+- Handles negative numbers and deep nesting
+- 36 comprehensive test cases with full validation
+
+## Project Features
+
+- **100% Test Coverage**: 69 total test cases across all challenges
+- **Performance Validated**: Comprehensive benchmarking for all implementations
+- **Code Quality**: RuboCop linting with Ruby 3.4 standards
 - **CI/CD Pipeline**: Automated testing, linting, and benchmarking
+- **Professional Structure**: Clean separation of concerns and documentation
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/sajjadmurtaza/string_reversal_utils.git
-cd string_reversal_utils
+git clone https://github.com/sajjadmurtaza/challenges.git
+cd challenges
 ```
 
 Install dependencies:
@@ -33,7 +53,9 @@ bundle install
 
 ## Usage
 
-### Basic Usage
+### String Reversal (Challenge 1)
+
+#### Basic Usage
 
 ```ruby
 require_relative 'lib/string_utils'
@@ -48,7 +70,7 @@ StringUtils.my_reverse('12345')
 # => "54321"
 ```
 
-### Unicode Support
+#### Unicode Support
 
 ```ruby
 StringUtils.my_reverse('Café')
@@ -61,7 +83,7 @@ StringUtils.my_reverse('Hello😀World')
 # => "dlroW😀olleH"
 ```
 
-### Error Handling
+#### Error Handling
 
 ```ruby
 StringUtils.my_reverse(nil)
@@ -69,6 +91,66 @@ StringUtils.my_reverse(nil)
 
 StringUtils.my_reverse(123)
 # => ArgumentError: Expected a String
+```
+
+### Nested Array Maximum (Challenge 2)
+
+#### Basic Usage
+
+```ruby
+require_relative 'lib/array_utils'
+
+ArrayUtils.my_max([1, 2, 3, 4, 5])
+# => 5
+
+ArrayUtils.my_max([1, [2, 3]])
+# => 3
+
+ArrayUtils.my_max([1, [2, [3, [4, [5]]]]])
+# => 5
+```
+
+#### Negative Numbers
+
+```ruby
+ArrayUtils.my_max([-5, -3, -10, -1])
+# => -1
+
+ArrayUtils.my_max([-5, 10, -3, 7])
+# => 10
+
+ArrayUtils.my_max([[-10, -5], [-3, -1]])
+# => -1
+```
+
+#### Complex Nesting
+
+```ruby
+ArrayUtils.my_max([[1, 2], [3, 4], [5, 6]])
+# => 6
+
+ArrayUtils.my_max([1, [2, [3, 4], 5], [6, 7], 8])
+# => 8
+```
+
+#### Error Handling
+
+```ruby
+ArrayUtils.my_max(nil)
+# => ArgumentError: Expected an Array
+
+ArrayUtils.my_max([1, 'two', 3])
+# => ArgumentError: Array contains non-integer, non-array element
+```
+
+#### Edge Cases
+
+```ruby
+ArrayUtils.my_max([])
+# => nil (empty array returns nil)
+
+ArrayUtils.my_max([[]])
+# => nil (nested empty arrays return nil)
 ```
 
 ## Running Tests
@@ -85,23 +167,34 @@ Run tests with documentation format:
 bundle exec rspec --format documentation
 ```
 
-Run specific test file:
+Run specific challenge tests:
 
 ```bash
 bundle exec rspec spec/string_utils_spec.rb
+bundle exec rspec spec/array_utils_spec.rb
 ```
 
 ### Test Coverage
 
-The project maintains 100% line coverage with 33 test cases covering:
+The project maintains 100% line coverage:
 
-- Valid string inputs (8 tests)
-- Unicode and multibyte characters (5 tests)
-- Whitespace variations (5 tests)
-- Long string handling (2 tests)
-- Invalid input validation (7 tests)
-- Edge cases (5 tests)
-- Performance characteristics (1 test)
+- **String Reversal**: 33 test cases
+  - Valid string inputs (8 tests)
+  - Unicode and multibyte characters (5 tests)
+  - Whitespace variations (5 tests)
+  - Invalid input validation (7 tests)
+  - Edge cases (5 tests)
+  - Long string handling (2 tests)
+  - Performance characteristics (1 test)
+
+- **Nested Array Maximum**: 36 test cases
+  - Simple arrays (6 tests)
+  - Nested arrays (7 tests)
+  - Negative numbers (5 tests)
+  - Large numbers (3 tests)
+  - Invalid inputs (8 tests)
+  - Edge cases (5 tests)
+  - Performance characteristics (2 tests)
 
 View coverage report:
 
@@ -115,22 +208,20 @@ Run comprehensive performance benchmarks:
 
 ```bash
 ruby benchmark/reverse_benchmark.rb
+ruby benchmark/max_benchmark.rb
 ```
 
-### Benchmark Categories
-
-1. **Repeated Character Tests**: Validates worst-case scenarios
-2. **Varied Character Tests**: Real-world mixed content
-3. **Unicode Character Tests**: Multibyte character performance
-4. **Memory Allocation Tests**: Multiple iteration efficiency
-5. **Complexity Validation**: Confirms O(n) linear scaling
-
-### Performance Results
+### String Reversal Performance
 
 - Handles 1M characters in ~65ms
 - Throughput: 2.5M - 15.4M chars/sec
 - Confirms O(n) time complexity
-- No performance degradation over multiple runs
+
+### Array Maximum Performance
+
+- Handles 1M elements in ~60ms
+- Throughput: 6M - 15M elements/sec
+- Efficient recursive traversal
 
 ## Code Quality
 
@@ -150,7 +241,7 @@ bundle exec rubocop --auto-correct
 
 ### Code Style
 
-- Ruby 3.0+ compatibility
+- Ruby 3.4 compatibility
 - Frozen string literals
 - Single quote string style
 - Max line length: 120 characters
@@ -162,7 +253,7 @@ The project uses GitHub Actions for continuous integration:
 
 ### Automated Jobs
 
-1. **Test Suite**: Runs on Ruby 3.0, 3.1, 3.2, 3.3
+1. **Test Suite**: Runs on Ruby 3.4.x (tested with 3.4.7)
 2. **RuboCop Linting**: Enforces code quality standards
 3. **Performance Benchmarks**: Validates performance characteristics
 
@@ -172,7 +263,7 @@ All jobs run automatically on:
 
 ## Technical Details
 
-### Algorithm
+### String Reversal Algorithm
 
 ```ruby
 def self.my_reverse(string)
@@ -188,36 +279,53 @@ def self.my_reverse(string)
 end
 ```
 
-### Complexity Analysis
+**Complexity:**
+- Time: O(n) where n is string length
+- Space: O(n) for the reversed string
 
-- **Time Complexity**: O(n) where n is string length
-- **Space Complexity**: O(n) for the reversed string
-- **Memory**: Uses `<<` operator for efficient string building
-- **Performance**: Frozen string literals for optimization
+### Array Maximum Algorithm
 
-### Design Decisions
+```ruby
+def self.my_max(array)
+  raise ArgumentError, 'Expected an Array' unless array.is_a?(Array)
 
-1. **Character-by-character iteration**: Simple, predictable performance
-2. **While loop**: Direct index access for clarity and KISS principle
-3. **Type validation**: Fail fast with clear error messages
-4. **Frozen string literals**: Memory optimization
-5. **YARD documentation**: Clear method and module documentation
+  max_value = nil
+  array.each do |element|
+    if element.is_a?(Array)
+      nested_max = my_max(element)
+      max_value = nested_max if max_value.nil? || nested_max > max_value
+    elsif element.is_a?(Integer)
+      max_value = element if max_value.nil? || element > max_value
+    else
+      raise ArgumentError, 'Array contains non-integer, non-array element'
+    end
+  end
+  max_value
+end
+```
+
+**Complexity:**
+- Time: O(n) where n is total number of elements
+- Space: O(d) where d is maximum nesting depth
 
 ## Project Structure
 
 ```
-string_reversal_utils/
+challenges/
 ├── .github/
 │   └── workflows/
 │       └── ruby-ci.yml       # GitHub Actions CI/CD pipeline
 ├── benchmark/
-│   └── reverse_benchmark.rb  # Performance benchmarking suite
+│   ├── reverse_benchmark.rb  # String reversal benchmarks
+│   └── max_benchmark.rb      # Array maximum benchmarks
 ├── coverage/                 # Test coverage reports (generated)
 ├── lib/
-│   └── string_utils.rb      # Core implementation
+│   ├── string_utils.rb      # Challenge 1: String reversal
+│   └── array_utils.rb       # Challenge 2: Nested array maximum
 ├── spec/
 │   ├── spec_helper.rb       # RSpec configuration
-│   └── string_utils_spec.rb # Test suite (33 tests)
+│   ├── string_utils_spec.rb # String reversal tests (33 tests)
+│   └── array_utils_spec.rb  # Array maximum tests (36 tests)
 ├── .gitignore               # Git ignore rules
 ├── .rspec                   # RSpec configuration
 ├── .rubocop.yml            # RuboCop linting rules
@@ -230,11 +338,11 @@ string_reversal_utils/
 
 ### Adding New Tests
 
-Tests are located in `spec/string_utils_spec.rb`. Follow the existing patterns:
+Tests are located in `spec/`. Follow the existing patterns:
 
 ```ruby
 it 'describes the expected behavior' do
-  expect(StringUtils.my_reverse('input')).to eq('expected')
+  expect(Module.method('input')).to eq('expected')
 end
 ```
 
@@ -247,8 +355,8 @@ bundle exec rspec --tag focus                    # Run focused tests
 
 ## Requirements
 
-- Ruby >= 3.0.0
-- Bundler
+- Ruby ~> 3.4.0 (tested with 3.4.7)
+- Bundler >= 2.5
 
 ### Dependencies
 

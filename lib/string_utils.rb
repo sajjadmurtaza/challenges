@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# Provides string manipulation utilities with custom implementations
 module StringUtils
-  # Reverses a string without using String#reverse
-  #
-  # @param string [String] the string to reverse
-  # @return [String] the reversed string
-  # @raise [ArgumentError] if string is not a String
+  # @param string [String]
+  # @return [String] reversed string
+  # @raise [ArgumentError] if not a String
   def self.my_reverse(string)
     raise ArgumentError, 'Expected a String' unless string.is_a?(String)
 

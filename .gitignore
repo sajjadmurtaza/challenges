@@ -25,4 +25,4 @@ mkmf.log
 .idea/
 .vscode/
 
-Gemfile.lock
+# Gemfile.lock should be committed for applications/gems
