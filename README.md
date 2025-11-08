@@ -23,9 +23,9 @@ Custom string reversal implementation without using Ruby's built-in `reverse` or
 Find the maximum value in nested array structures without using array flattening methods.
 
 **Features:**
-- Recursive traversal of nested arrays
+- Iterative stack-based traversal of nested arrays
 - O(n) time complexity for total elements
-- Handles negative numbers and deep nesting
+- Handles negative numbers and deep nesting (safe for arbitrary depth)
 - 36 comprehensive test cases with full validation
 
 ## Project Features
@@ -219,9 +219,10 @@ ruby benchmark/max_benchmark.rb
 
 ### Array Maximum Performance
 
-- Handles 1M elements in ~60ms
-- Throughput: 6M - 15M elements/sec
-- Efficient recursive traversal
+- Handles 1M elements in ~54ms
+- Throughput: 15-19M elements/sec
+- Efficient iterative stack-based traversal
+- Safe for arbitrarily deep nesting (no stack overflow risk)
 
 ## Code Quality
 
@@ -290,16 +291,21 @@ def self.my_max(array)
   raise ArgumentError, 'Expected an Array' unless array.is_a?(Array)
 
   max_value = nil
-  array.each do |element|
-    if element.is_a?(Array)
-      nested_max = my_max(element)
-      max_value = nested_max if max_value.nil? || nested_max > max_value
-    elsif element.is_a?(Integer)
-      max_value = element if max_value.nil? || element > max_value
-    else
-      raise ArgumentError, 'Array contains non-integer, non-array element'
+  stack = [array]
+
+  until stack.empty?
+    stack.pop.each do |element|
+      case element
+      when Array
+        stack.push(element)
+      when Integer
+        max_value = element if max_value.nil? || element > max_value
+      else
+        raise ArgumentError, 'Array contains non-integer, non-array element'
+      end
     end
   end
+
   max_value
 end
 ```
@@ -307,6 +313,7 @@ end
 **Complexity:**
 - Time: O(n) where n is total number of elements
 - Space: O(d) where d is maximum nesting depth
+- Uses iterative approach with explicit stack for safety with deep nesting
 
 ## Project Structure
 

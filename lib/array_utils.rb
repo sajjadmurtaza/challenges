@@ -8,16 +8,21 @@ module ArrayUtils
     raise ArgumentError, 'Expected an Array' unless array.is_a?(Array)
 
     max_value = nil
-    array.each do |element|
-      if element.is_a?(Array)
-        nested_max = my_max(element)
-        max_value = nested_max if max_value.nil? || nested_max > max_value
-      elsif element.is_a?(Integer)
-        max_value = element if max_value.nil? || element > max_value
-      else
-        raise ArgumentError, 'Array contains non-integer, non-array element'
+    stack = [array]
+
+    until stack.empty?
+      stack.pop.each do |element|
+        case element
+        when Array
+          stack.push(element)
+        when Integer
+          max_value = element if max_value.nil? || element > max_value
+        else
+          raise ArgumentError, 'Array contains non-integer, non-array element'
+        end
       end
     end
+
     max_value
   end
 end

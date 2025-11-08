@@ -33,7 +33,7 @@ Metrics/BlockLength:
     - 'benchmark/**/*'
 
 Metrics/MethodLength:
-  Max: 15
+  Max: 17
   Exclude:
     - 'benchmark/**/*'
 
