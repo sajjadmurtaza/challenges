@@ -28,13 +28,32 @@ Find the maximum value in nested array structures without using array flattening
 - Handles negative numbers and deep nesting (safe for arbitrary depth)
 - 36 comprehensive test cases with full validation
 
+### Challenge 3: Acme Widget Co - Shopping Basket System
+
+Production-ready shopping basket implementation for Acme Widget Co with tiered delivery rules and extensible offer system.
+
+**Features:**
+- BigDecimal-based monetary precision (no floating-point errors)
+- Dependency injection architecture (catalogue, delivery rules, offers)
+- Strategy pattern for extensible discount system
+- 81 comprehensive tests with extensive edge case coverage
+- CLI interface for easy testing
+
+**Quick Start:**
+```bash
+bin/basket R01 R01  # => $54.37
+```
+
+📖 **[Full Documentation →](lib/acme/README.md)**
+
 ## Project Features
 
-- **100% Test Coverage**: 69 total test cases across all challenges
-- **Performance Validated**: Comprehensive benchmarking for all implementations
-- **Code Quality**: RuboCop linting with Ruby 3.4 standards
+- **Comprehensive Testing**: 150 test cases across all challenges (99.34% coverage)
+- **Performance Validated**: Comprehensive benchmarking for core algorithms
+- **Code Quality**: RuboCop linting with Ruby 3.4 standards (zero violations)
 - **CI/CD Pipeline**: Automated testing, linting, and benchmarking
 - **Professional Structure**: Clean separation of concerns and documentation
+- **Production-Ready**: BigDecimal precision, dependency injection, strategy patterns
 
 ## Installation
 
@@ -172,11 +191,12 @@ Run specific challenge tests:
 ```bash
 bundle exec rspec spec/string_utils_spec.rb
 bundle exec rspec spec/array_utils_spec.rb
+bundle exec rspec spec/acme/
 ```
 
 ### Test Coverage
 
-The project maintains 100% line coverage:
+The project maintains 99.34% line coverage:
 
 - **String Reversal**: 33 test cases
   - Valid string inputs (8 tests)
@@ -321,24 +341,46 @@ end
 challenges/
 ├── .github/
 │   └── workflows/
-│       └── ruby-ci.yml       # GitHub Actions CI/CD pipeline
+│       └── ruby-ci.yml          # GitHub Actions CI/CD pipeline
 ├── benchmark/
-│   ├── reverse_benchmark.rb  # String reversal benchmarks
-│   └── max_benchmark.rb      # Array maximum benchmarks
-├── coverage/                 # Test coverage reports (generated)
+│   ├── reverse_benchmark.rb     # String reversal benchmarks
+│   └── max_benchmark.rb         # Array maximum benchmarks
+├── bin/
+│   └── basket                   # Acme basket CLI (Challenge 3)
+├── coverage/                    # Test coverage reports (generated)
 ├── lib/
-│   ├── string_utils.rb      # Challenge 1: String reversal
-│   └── array_utils.rb       # Challenge 2: Nested array maximum
+│   ├── string_utils.rb          # Challenge 1: String reversal
+│   ├── array_utils.rb           # Challenge 2: Nested array maximum
+│   ├── acme.rb                  # Challenge 3: Main entry point
+│   └── acme/
+│       ├── README.md            # Challenge 3: Full documentation
+│       ├── basket.rb            # Shopping basket
+│       ├── catalogue.rb         # Product catalogue
+│       ├── delivery_rules.rb    # Tiered shipping
+│       ├── money.rb             # BigDecimal precision
+│       ├── product.rb           # Product model
+│       ├── errors.rb            # Custom exceptions
+│       └── offers/
+│           ├── base.rb          # Offer interface
+│           └── bogo_half.rb     # BOGO 50% implementation
 ├── spec/
-│   ├── spec_helper.rb       # RSpec configuration
-│   ├── string_utils_spec.rb # String reversal tests (33 tests)
-│   └── array_utils_spec.rb  # Array maximum tests (36 tests)
-├── .gitignore               # Git ignore rules
-├── .rspec                   # RSpec configuration
-├── .rubocop.yml            # RuboCop linting rules
-├── Gemfile                 # Dependency management
-├── Rakefile                # Rake tasks
-└── README.md               # This file
+│   ├── spec_helper.rb           # RSpec configuration
+│   ├── string_utils_spec.rb     # Challenge 1 tests (33 tests)
+│   ├── array_utils_spec.rb      # Challenge 2 tests (36 tests)
+│   └── acme/                    # Challenge 3 tests (68 tests)
+│       ├── basket_spec.rb
+│       ├── money_spec.rb
+│       ├── product_spec.rb
+│       ├── catalogue_spec.rb
+│       ├── delivery_rules_spec.rb
+│       └── offers/
+│           └── bogo_half_spec.rb
+├── .gitignore                   # Git ignore rules
+├── .rspec                       # RSpec configuration
+├── .rubocop.yml                 # RuboCop linting rules
+├── Gemfile                      # Dependency management
+├── Rakefile                     # Rake tasks
+└── README.md                    # This file
 ```
 
 ## Development
