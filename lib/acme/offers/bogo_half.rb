@@ -23,7 +23,6 @@ module Acme
         matching_items = items.select { |item| item.code == @product_code }
         return Money.zero if matching_items.empty?
 
-        # Calculate discount: for every pair, discount one item
         pairs = matching_items.size / 2
         return Money.zero if pairs.zero?
 

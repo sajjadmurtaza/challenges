@@ -31,19 +31,10 @@ module Acme
     # Calculate total including discounts and delivery
     # @return [Money]
     def total
-      # Calculate subtotal
       subtotal = @items.reduce(Money.zero) { |sum, item| sum + item.price }
-
-      # Apply all offers
       total_discount = @offers.reduce(Money.zero) { |sum, offer| sum + offer.apply(@items) }
-
-      # Calculate discounted subtotal
       discounted_subtotal = subtotal - total_discount
-
-      # Calculate delivery based on discounted subtotal
       delivery = @delivery_rules.calculate(discounted_subtotal)
-
-      # Return final total
       discounted_subtotal + delivery
     end
   end
