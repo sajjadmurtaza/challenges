@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 ruby '~> 3.4.0'
 
+gem 'bigdecimal', '~> 3.1'
+
 group :test do
   gem 'rspec', '~> 3.12'
   gem 'simplecov', '~> 0.22', require: false
