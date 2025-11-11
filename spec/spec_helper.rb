@@ -7,6 +7,7 @@ end
 
 require_relative '../lib/string_utils'
 require_relative '../lib/array_utils'
+require_relative '../lib/acme'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
