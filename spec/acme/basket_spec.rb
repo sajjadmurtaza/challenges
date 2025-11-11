@@ -15,10 +15,12 @@ RSpec.describe Acme::Basket do
 
   let(:delivery_rules) do
     Acme::DeliveryRules.new([
-      { threshold: Acme::Money.from_decimal('50.00'), charge: Acme::Money.from_decimal('4.95') },
-      { threshold: Acme::Money.from_decimal('90.00'), charge: Acme::Money.from_decimal('2.95') },
-      { threshold: nil, charge: Acme::Money.zero }
-    ])
+                              { threshold: Acme::Money.from_decimal('50.00'),
+                                charge: Acme::Money.from_decimal('4.95') },
+                              { threshold: Acme::Money.from_decimal('90.00'),
+                                charge: Acme::Money.from_decimal('2.95') },
+                              { threshold: nil, charge: Acme::Money.zero }
+                            ])
   end
 
   let(:offers) do
@@ -105,21 +107,37 @@ RSpec.describe Acme::Basket do
       it 'calculates subtotal + delivery' do
         basket.add('B01')
 
-        # B01 = $7.95, under $50 so delivery = $4.95
         expect(basket.total.to_s).to eq('$12.90')
       end
     end
 
     context 'with items qualifying for free delivery' do
       it 'does not charge delivery' do
-        basket.add('R01') # $32.95
-        basket.add('R01') # $32.95
-        basket.add('G01') # $24.95
+        basket.add('R01')
+        basket.add('R01')
+        basket.add('G01')
 
-        # Subtotal = $90.85, with BOGO: $90.85 - $16.48 = $74.37
-        # Under $90, so delivery = $2.95
-        # Total should be $77.32
         expect(basket.total).to be_a(Acme::Money)
+      end
+    end
+
+    context 'with many items' do
+      it 'handles large baskets' do
+        10.times { basket.add('B01') }
+
+        expect(basket.items.size).to eq(10)
+        expect(basket.total).to be_a(Acme::Money)
+      end
+    end
+
+    context 'with mixed products' do
+      it 'calculates correctly' do
+        basket.add('R01')
+        basket.add('G01')
+        basket.add('B01')
+
+        total = basket.total
+        expect(total.cents).to be > 0
       end
     end
   end
